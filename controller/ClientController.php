@@ -6,15 +6,15 @@ class ClientController {
     public function __construct($db) {
       $this->db = $db;
     }
-  
+
+
     public function addClient($name, $birth, $cpf, $rg, $phone) {
       // Insere um novo cliente no banco de dados
       $query = "INSERT INTO client (name, birth, cpf, rg, phone) VALUES (?, ?, ?, ?, ?)";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param("sssss", $name, $birth, $cpf, $rg, $phone);
-      $stmt->execute();
+      $stmt->execute([$name, $birth, $cpf, $rg, $phone]);
     }
-  
+    
     public function updateClient($id, $name, $birth, $cpf, $rg, $phone) {
       // Atualiza os dados de um cliente no banco de dados
       $query = "UPDATE client SET name=?, birth=?, cpf=?, rg=?, phone=? WHERE client_id=?";

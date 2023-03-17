@@ -1,24 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Minha aplicação</title>
-</head>
-<body>
-	<header>
-		<nav>
-			<ul>
-				<li><a href="/">Home</a></li>
-				<li><a href="/clientes">Clientes</a></li>
-				<li><a href="/endereco">Endereço</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<?php echo $content; ?>
-	</main>
-	<footer>
-		<p>Minha aplicação - Todos os direitos reservados</p>
-	</footer>
-</body>
-</html>
+<?php
+    // inclusão do arquivo de configuração do banco de dados
+    require_once "config/database.php";
+
+    // inclusão do cabeçalho da página
+    require_once "view/layout/header.php";
+
+    // inclusão do conteúdo da página
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 'home';
+    }
+
+    switch ($page) {
+        case 'create-client':
+            include "view/create-client.php";
+            break;
+        // incluir outros cases para outras páginas, se existirem
+        default:
+            include "view/home.php";
+            break;
+    }
+
+    // inclusão do rodapé da página
+    require_once "view/layout/footer.php";
+?>
